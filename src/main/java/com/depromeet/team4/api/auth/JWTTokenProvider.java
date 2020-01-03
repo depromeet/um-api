@@ -1,14 +1,15 @@
 package com.depromeet.team4.api.auth;
 
-import com.depromeet.team4.api.model.Token;
-import com.depromeet.team4.api.model.UserDto;
+import com.depromeet.team4.api.dto.LoginType;
+import com.depromeet.team4.api.dto.Token;
+import com.depromeet.team4.api.dto.UserDto;
 import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.Optional;
 
@@ -25,20 +26,19 @@ public class JWTTokenProvider implements TokenProvider {
     private int refreshTokenExpirationSeconds;
 
     private static final String AUTHORITIES_ID = "userId";
-    private static final String AUTHORITIES_Email = "userEmail";
+    private static final String AUTHORITIES_EMAIL = "userEmail";
+    private static final String AUTHORITIES_LOGIN_TYPE = "loginType";
     private static final String BEARER = "Bearer";
     @Override
     public Optional<Token> generatedToken(UserDto userDto) {
-        Long userId = userDto.getId();
-        String userEmail = userDto.getEmail();
         return Optional.ofNullable(Token.builder()
-                .accessToken(newToken(userId, userEmail, true))
-                .refreshToken(newToken(userId, userEmail, false))
+                .accessToken(newToken(userDto, true))
+                .refreshToken(newToken(userDto, false))
                 .type(BEARER)
                 .build());
     }
 
-    private String newToken(Long userId, String userEmail, boolean isAccessToken) {
+    private String newToken(UserDto userDto, boolean isAccessToken) {
         long now = (new Date()).getTime();
         Date validity = (isAccessToken) ? new Date(now + this.accessTokenExpirationSeconds*1000) :
                 new Date(now + this.refreshTokenExpirationSeconds*1000);
@@ -46,8 +46,9 @@ public class JWTTokenProvider implements TokenProvider {
 
         return Jwts.builder()
                 .setHeaderParam("typ", "JWT")
-                .claim(AUTHORITIES_ID,userId)
-                .claim(AUTHORITIES_Email, userEmail)
+                .claim(AUTHORITIES_ID, userDto.getId())
+                .claim(AUTHORITIES_EMAIL, userDto.getEmail())
+                .claim(AUTHORITIES_LOGIN_TYPE, userDto.getLoginType())
                 .setExpiration(validity)
                 .signWith(SignatureAlgorithm.HS256, this.generateKey(key))
                 .compact();
@@ -64,39 +65,31 @@ public class JWTTokenProvider implements TokenProvider {
                     .parseClaimsJws(token).getBody();
             return Optional.ofNullable(UserDto.builder()
                     .id(Long.valueOf((Integer) claims.get(AUTHORITIES_ID)))
-                    .email(claims.get(AUTHORITIES_Email).toString())
+                    .email(claims.get(AUTHORITIES_EMAIL).toString())
+                    .loginType(LoginType.valueOf(claims.get(AUTHORITIES_LOGIN_TYPE).toString()))
                     .build());
         } catch (SecurityException | MalformedJwtException e) {
-            log.info("Invalid JWT signature.");
-            log.trace("Invalid JWT signature trace: {}", e);
+            log.error("Invalid JWT signature trace: {}", e);
             message = e.getMessage();
         } catch (ExpiredJwtException e) {
-            log.info("Expired JWT token.");
-            log.trace("Expired JWT token trace: {}", e);
+            log.error("Expired JWT token trace: {}", e);
             message = e.getMessage();
         } catch (UnsupportedJwtException e) {
-            log.info("Unsupported JWT token.");
-            log.trace("Unsupported JWT token trace: {}", e);
+            log.error("Unsupported JWT token trace: {}", e);
             message = e.getMessage();
         } catch (IllegalArgumentException e) {
-            log.info("JWT token compact of handler are invalid.");
-            log.trace("JWT token compact of handler are invalid trace: {}", e);
+            log.error("JWT token compact of handler are invalid trace: {}", e);
             message = e.getMessage();
         } catch (JwtException e) {
-            log.info("JWT token are invalid.");
-            log.trace("JWT token are invalid trace: {}", e);
+            log.error("JWT token are invalid trace: {}", e);
             message = e.getMessage();
         }
-        throw new RuntimeException(message);
+        throw new BadCredentialsException(message);
     }
 
     private byte[] generateKey(String secretKey) {
         byte[] key = null;
-        try {
-            key = secretKey.getBytes("UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+        key = secretKey.getBytes(StandardCharsets.UTF_8);
         return key;
     }
 }

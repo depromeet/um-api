@@ -1,10 +1,12 @@
 package com.depromeet.team4.api.model;
 
+import com.depromeet.team4.api.dto.LoginType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter
@@ -16,9 +18,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     @Column
+    @NotNull
     String email;
     @Column
-    String password;
-    @Column
+    @NotNull
     String username;
+    @Enumerated(EnumType.STRING)
+    @Column
+    @NotNull
+    LoginType loginType;
 }

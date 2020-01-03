@@ -55,8 +55,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(STATELESS)
                 .and()
                 .exceptionHandling()
-                // this entry point handles when you request a protected page and you are not yet
-                // authenticated
                 .defaultAuthenticationEntryPointFor(forbiddenEntryPoint(), PROTECTED_URLS)
                 .and()
                 .authenticationProvider(provider)

@@ -3,27 +3,20 @@ package com.depromeet.team4.api.service;
 import com.depromeet.team4.api.model.User;
 import com.depromeet.team4.api.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 @Slf4j
 public class UserService {
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
-    public void save(User user) {
+    public User save(User user) {
         userRepository.save(user);
-    }
-
-    public boolean equalsPassword(String requestPassword, String originPassword) {
-        return passwordEncoder.matches(requestPassword, originPassword);
+        return user;
     }
 
     public User findById(Long id) {
@@ -35,5 +28,9 @@ public class UserService {
     public User findByEmail(String email) {
         return userRepository.findByEmail(email)
                 .orElseThrow(IllegalAccessError::new);
+    }
+
+    public boolean existsByEmail(String email) {
+        return userRepository.existsByEmail(email);
     }
 }

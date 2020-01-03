@@ -1,9 +1,8 @@
 package com.depromeet.team4.api.controller;
 
-import com.depromeet.team4.api.model.Token;
-import com.depromeet.team4.api.model.request.EmailLoginRequest;
-import com.depromeet.team4.api.model.request.EmailRegisterRequest;
-import com.depromeet.team4.api.service.AccountService;
+import com.depromeet.team4.api.dto.Token;
+import com.depromeet.team4.api.dto.EmailLoginRequest;
+import com.depromeet.team4.api.dto.EmailRegisterRequest;
 import com.depromeet.team4.api.service.EmailAccountService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.transaction.annotation.Transactional;
