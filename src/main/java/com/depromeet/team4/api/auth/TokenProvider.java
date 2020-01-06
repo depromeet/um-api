@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface TokenProvider {
     Optional<Token> generatedToken(UserDto userDto);
     Optional<UserDto> verifyToken(String token, boolean isAccess);
+    Optional<Token> refreshToken(String refreshToken);
 }

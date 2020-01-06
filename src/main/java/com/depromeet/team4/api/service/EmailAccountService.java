@@ -28,7 +28,7 @@ public class EmailAccountService extends AccountService {
     }
 
     @Override
-    protected void preRegister(RegisterRequest registerRequest) {
+    protected void beforeRegister(RegisterRequest registerRequest) {
         registerRequest.setLoginType(LoginType.EMAIL);
     }
 
