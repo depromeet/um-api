@@ -2,6 +2,7 @@ package com.depromeet.team4.api.service;
 
 import com.depromeet.team4.api.dto.UserDto;
 import com.depromeet.team4.api.model.User;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.stereotype.Service;
 
 import static java.util.Optional.ofNullable;

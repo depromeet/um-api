@@ -19,13 +19,13 @@ public abstract class AccountService {
         this.tokenProvider = tokenProvider;
         this.userService = userService;
     }
-    protected abstract void preRegister(RegisterRequest registerRequest);
+    protected abstract void beforeRegister(RegisterRequest registerRequest);
 
-    public Token register(RegisterRequest registerRequest) throws IllegalAccessException {
+    public Token register(RegisterRequest registerRequest) throws IllegalArgumentException {
         if (userService.existsByEmail(registerRequest.getEmail())) {
             throw new AccountAlreadyExistException("Email duplicated");
         }
-        this.preRegister(registerRequest);
+        this.beforeRegister(registerRequest);
 
         User user = userService.save(User.builder()
                 .email(registerRequest.getEmail())
@@ -45,9 +45,8 @@ public abstract class AccountService {
     }
     protected abstract void registerAccount(RegisterRequest registerRequest, User user);
 
-    public Token login(LoginRequest loginRequest) throws IllegalAccessException {
-        return tokenProvider.generatedToken(
-                this.verifyAccount(loginRequest))
+    public Token login(LoginRequest loginRequest) throws IllegalArgumentException {
+        return tokenProvider.generatedToken(this.verifyAccount(loginRequest))
                 .orElseThrow(IllegalArgumentException::new);
     }
 

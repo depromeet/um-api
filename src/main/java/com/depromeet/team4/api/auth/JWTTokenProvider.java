@@ -87,6 +87,13 @@ public class JWTTokenProvider implements TokenProvider {
         throw new BadCredentialsException(message);
     }
 
+    @Override
+    public Optional<Token> refreshToken(String refreshToken) {
+        UserDto userDto = this.verifyToken(refreshToken, false)
+                .orElseThrow(()->new BadCredentialsException("Refresh Token is not verified"));
+        return this.generatedToken(userDto);
+    }
+
     private byte[] generateKey(String secretKey) {
         byte[] key = null;
         key = secretKey.getBytes(StandardCharsets.UTF_8);
