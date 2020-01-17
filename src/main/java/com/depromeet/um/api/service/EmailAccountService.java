@@ -2,7 +2,6 @@ package com.depromeet.um.api.service;
 
 import com.depromeet.um.api.auth.TokenProvider;
 import com.depromeet.um.api.auth.UserSession;
-import com.depromeet.um.api.exception.AccountAlreadyExistException;
 import com.depromeet.um.api.model.EmailUser;
 import com.depromeet.um.api.dto.LoginType;
 import com.depromeet.um.api.model.User;
@@ -10,6 +9,7 @@ import com.depromeet.um.api.dto.LoginRequest;
 import com.depromeet.um.api.dto.RegisterRequest;
 import com.depromeet.um.api.dto.EmailLoginRequest;
 import com.depromeet.um.api.dto.EmailRegisterRequest;
+import com.depromeet.um.api.util.StringUtils;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,25 +19,30 @@ import org.springframework.stereotype.Service;
 public class EmailAccountService extends AccountService {
     private final PasswordEncoder passwordEncoder;
     private final EmailUserService emailUserService;
+    private final UserService userService;
+    private static final String EMAIL_PREFIX = StringUtils.UM_PREFIX + "EMAIL";
 
     protected EmailAccountService(TokenProvider tokenProvider, UserService userService,
-                                  EmailUserService emailUserService) {
+                                  EmailUserService emailUserService, UserService userService1) {
         super(tokenProvider, userService);
         this.emailUserService = emailUserService;
+        this.userService = userService1;
         this.passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
     @Override
-    protected void beforeRegister(RegisterRequest registerRequest) {
-        registerRequest.setLoginType(LoginType.EMAIL);
+    protected boolean isExistAccount(RegisterRequest registerRequest) {
+        return emailUserService.existsByEmail(((EmailRegisterRequest) registerRequest).getEmail());
     }
 
     @Override
-    protected void registerAccount(RegisterRequest registerRequest, User user) {
+    protected User registerAccount(RegisterRequest registerRequest) {
         EmailRegisterRequest emailRegisterRequest = (EmailRegisterRequest) registerRequest;
-        if (emailUserService.existsByEmail(emailRegisterRequest.getEmail())) {
-            throw new AccountAlreadyExistException();
-        }
+        User user = userService.save(User.builder()
+                .umId(emailRegisterRequest.getEmail() + EMAIL_PREFIX)
+                .loginType(LoginType.EMAIL)
+                .build());
+
         emailUserService.save(
                 EmailUser.builder()
                         .email(emailRegisterRequest.getEmail())
@@ -45,6 +50,7 @@ public class EmailAccountService extends AccountService {
                         .user(user)
                         .build()
         );
+        return user;
     }
 
     @Override
@@ -54,7 +60,7 @@ public class EmailAccountService extends AccountService {
         if (this.equalsPassword(emailLoginRequest.getPassword(), emailUser.getPassword())) {
             return UserSession.builder()
                     .id(emailUser.getUser().getId())
-                    .email(emailUser.getEmail())
+                    .umId(emailUser.getUser().getUmId())
                     .build();
         }
         throw new BadCredentialsException("Password not match");

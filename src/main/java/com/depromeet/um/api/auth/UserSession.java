@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.ToString;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 
-import javax.validation.constraints.NotNull;
+import org.jetbrains.annotations.NotNull;
 
 
 @Getter
@@ -15,15 +15,15 @@ public class UserSession extends AbstractAuthenticationToken {
     @NotNull
     private Long id;
     @NotNull
-    private String email;
+    private String umId;
     @NotNull
     private LoginType loginType;
 
     @Builder
-    public UserSession(Long id, String email, LoginType loginType) {
+    public UserSession(@NotNull Long id, @NotNull String umId, @NotNull LoginType loginType) {
         super(null);
         this.id = id;
-        this.email = email;
+        this.umId = umId;
         this.loginType = loginType;
         setAuthenticated(false);
     }

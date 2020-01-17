@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-
 import org.jetbrains.annotations.NotNull;
 
 import static lombok.AccessLevel.PROTECTED;
@@ -13,11 +12,9 @@ import static lombok.AccessLevel.PROTECTED;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor(access = PROTECTED)
-public abstract class RegisterRequest {
+public class KakaoLoginRequest extends LoginRequest {
     @NotNull
-    private String firstName;
+    private String kakaoId;
     @NotNull
-    private String lastName;
-    @NotNull
-    private String nickName;
+    private String accessToken;
 }

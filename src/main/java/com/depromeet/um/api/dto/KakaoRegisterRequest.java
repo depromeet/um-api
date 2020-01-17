@@ -13,11 +13,11 @@ import static lombok.AccessLevel.PROTECTED;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor(access = PROTECTED)
-public abstract class RegisterRequest {
+public class KakaoRegisterRequest extends RegisterRequest {
     @NotNull
-    private String firstName;
+    private String kakaoId;
     @NotNull
-    private String lastName;
+    private String kakaoEmail;
     @NotNull
-    private String nickName;
+    private String accessToken;
 }

@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import javax.validation.constraints.NotNull;
+import org.jetbrains.annotations.NotNull;
 
 import static lombok.AccessLevel.PROTECTED;
 

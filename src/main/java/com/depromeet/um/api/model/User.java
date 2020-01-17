@@ -5,9 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
+import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter
@@ -15,16 +15,20 @@ import javax.validation.constraints.NotNull;
 @ToString
 @AllArgsConstructor
 public class User {
-    protected User(){}
+    protected User() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+
     @Column
     @NotNull
-    String email;
-    @Column
-    @NotNull
-    String username;
+    String umId;
+
+    @Embedded
+    UserName userName;
+
     @Enumerated(EnumType.STRING)
     @Column
     @NotNull

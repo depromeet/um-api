@@ -25,12 +25,12 @@ public class UserService {
                 .orElseThrow(IllegalAccessError::new);
     }
 
-    public User findByEmail(String email) {
-        return userRepository.findByEmail(email)
+    public User findByUmId(String umId) {
+        return userRepository.findByUmId(umId)
                 .orElseThrow(IllegalAccessError::new);
     }
 
-    public boolean existsByEmail(String email) {
-        return userRepository.existsByEmail(email);
+    public boolean existsByUmId(String umId) {
+        return userRepository.existsByUmId(umId);
     }
 }

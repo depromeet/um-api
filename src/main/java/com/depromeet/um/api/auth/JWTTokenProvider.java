@@ -25,7 +25,7 @@ public class JWTTokenProvider implements TokenProvider {
     private int refreshTokenExpirationSeconds;
 
     private static final String AUTHORITIES_ID = "userId";
-    private static final String AUTHORITIES_EMAIL = "userEmail";
+    private static final String AUTHORITIES_UM_ID = "umId";
     private static final String AUTHORITIES_LOGIN_TYPE = "loginType";
     private static final String BEARER = "Bearer";
     @Override
@@ -46,7 +46,7 @@ public class JWTTokenProvider implements TokenProvider {
         return Jwts.builder()
                 .setHeaderParam("typ", "JWT")
                 .claim(AUTHORITIES_ID, userSession.getId())
-                .claim(AUTHORITIES_EMAIL, userSession.getEmail())
+                .claim(AUTHORITIES_UM_ID, userSession.getUmId())
                 .claim(AUTHORITIES_LOGIN_TYPE, userSession.getLoginType())
                 .setExpiration(validity)
                 .signWith(SignatureAlgorithm.HS256, this.generateKey(key))
@@ -64,7 +64,7 @@ public class JWTTokenProvider implements TokenProvider {
                     .parseClaimsJws(token).getBody();
             return Optional.ofNullable(UserSession.builder()
                     .id(Long.valueOf((Integer) claims.get(AUTHORITIES_ID)))
-                    .email(claims.get(AUTHORITIES_EMAIL).toString())
+                    .umId(claims.get(AUTHORITIES_UM_ID).toString())
                     .loginType(LoginType.valueOf(claims.get(AUTHORITIES_LOGIN_TYPE).toString()))
                     .build());
         } catch (SecurityException | MalformedJwtException e) {

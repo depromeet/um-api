@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import javax.validation.constraints.NotNull;
+import org.jetbrains.annotations.NotNull;
 
 import static lombok.AccessLevel.PROTECTED;
 
@@ -14,6 +14,8 @@ import static lombok.AccessLevel.PROTECTED;
 @AllArgsConstructor
 @NoArgsConstructor(access = PROTECTED)
 public class EmailRegisterRequest extends RegisterRequest {
+    @NotNull
+    private String email;
     @NotNull
     private String password;
 }
