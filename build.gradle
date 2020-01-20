@@ -34,6 +34,8 @@ dependencies {
     implementation  "org.springframework.boot:spring-boot-starter-web"
     implementation  "org.springframework.boot:spring-boot-starter-data-jpa"
     implementation  "org.springframework.boot:spring-boot-starter-security"
+    implementation  "org.springframework.boot:spring-boot-starter-webflux"
+    compile group: 'org.projectreactor', name: 'reactor-spring', version: '1.0.1.RELEASE'
 
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.13'
 
@@ -55,4 +57,7 @@ dependencies {
 
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
     compile group: 'org.jetbrains', name: 'annotations', version: '18.0.0'
+
+    compile group: 'com.auth0', name: 'java-jwt', version: '3.8.3'
+    compile group: 'com.auth0', name: 'jwks-rsa', version: '0.9.0'
 }

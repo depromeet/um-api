@@ -1,15 +1,22 @@
 package com.depromeet.um.api.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
+import org.jetbrains.annotations.NotNull;
 
 import static lombok.AccessLevel.PROTECTED;
 
 @Getter
-@SuperBuilder
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = PROTECTED)
-public abstract class LoginRequest {
+public class KakaoTokenInfoResponse {
+    @NotNull
+    private Long id;
+    @NotNull
+    private Long expiresInMillis;
+    @NotNull
+    private Long appId;
 }

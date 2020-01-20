@@ -3,10 +3,10 @@ package com.depromeet.um.api.model;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.jetbrains.annotations.NotNull;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -27,16 +27,14 @@ public class KakaoUser {
      * 카카오 - 앱 사이의 부여되는 고유한 id
      */
     @Id
-    @Column
     @NotNull
     private String kakaoId;
 
-    @Column
     @NotNull
     private String kakaoEmail;
 
-    @Column
     @NotNull
+    @Setter
     private String lastAccessToken;
 
     @OneToOne(fetch = FetchType.EAGER, optional = false)
