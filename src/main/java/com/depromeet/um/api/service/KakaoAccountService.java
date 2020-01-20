@@ -16,12 +16,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class KakaoAccountService extends AccountService {
     private final KakaoUserService kakaoUserService;
+    private final KakaoVerifyService kakaoVerifyService;
     private final UserService userService;
     private static final String KAKAO_PREFIX = StringUtils.UM_PREFIX + "KAKAO";
 
-    protected KakaoAccountService(TokenProvider tokenProvider, UserService userService, KakaoUserService kakaoUserService, UserService userService1) {
+    protected KakaoAccountService(TokenProvider tokenProvider, UserService userService, KakaoUserService kakaoUserService, KakaoVerifyService kakaoVerifyService, UserService userService1) {
         super(tokenProvider, userService);
         this.kakaoUserService = kakaoUserService;
+        this.kakaoVerifyService = kakaoVerifyService;
         this.userService = userService1;
     }
 
@@ -34,18 +36,21 @@ public class KakaoAccountService extends AccountService {
     protected User registerAccount(RegisterRequest registerRequest) {
         KakaoRegisterRequest kakaoRegisterRequest = (KakaoRegisterRequest) registerRequest;
         User user = userService.save(User.builder()
-                .umId(kakaoRegisterRequest.getKakaoEmail() + KAKAO_PREFIX)
+                .umId(kakaoRegisterRequest.getKakaoId() + KAKAO_PREFIX)
                 .loginType(LoginType.KAKAO)
                 .build());
 
-        kakaoUserService.save(
-                KakaoUser.builder()
-                        .kakaoId(kakaoRegisterRequest.getKakaoId())
-                        .kakaoEmail(kakaoRegisterRequest.getKakaoEmail())
-                        .lastAccessToken(kakaoRegisterRequest.getAccessToken())
-                        .user(user)
-                        .build()
-        );
+        KakaoUser kakaoUser = KakaoUser.builder()
+                .kakaoId(kakaoRegisterRequest.getKakaoId())
+                .kakaoEmail(kakaoRegisterRequest.getKakaoEmail())
+                .lastAccessToken(kakaoRegisterRequest.getAccessToken())
+                .user(user)
+                .build();
+
+        if (kakaoVerifyService.verifyAccessToken(kakaoUser, kakaoRegisterRequest.getAccessToken())) {
+            kakaoUserService.save(kakaoUser);
+        }
+
         return user;
     }
 
@@ -53,8 +58,7 @@ public class KakaoAccountService extends AccountService {
     protected UserSession verifyAccount(LoginRequest loginRequest) {
         KakaoLoginRequest kakaoLoginRequest = (KakaoLoginRequest) loginRequest;
         KakaoUser kakaoUser = kakaoUserService.findByKakaoId(kakaoLoginRequest.getKakaoId());
-        // TODO token checker
-        if (true) {
+        if (kakaoVerifyService.verifyAccessToken(kakaoUser, kakaoLoginRequest.getAccessToken())) {
             return UserSession.builder()
                     .id(kakaoUser.getUser().getId())
                     .umId(kakaoUser.getUser().getUmId())

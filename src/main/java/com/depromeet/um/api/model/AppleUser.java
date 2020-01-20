@@ -19,20 +19,23 @@ import static org.hibernate.annotations.OnDeleteAction.CASCADE;
 @Getter
 @Builder
 @AllArgsConstructor
-public class EmailUser {
-    protected EmailUser() {
+public class AppleUser {
+    protected AppleUser() {
     }
 
     /**
-     * User entity 의 email 와 매핑된다.
+     * Apple 에서 제공해주는 unique Id
      */
     @Id
     @NotNull
-    private String email;
+    private String appleId;
+
+    @NotNull
+    private String appleEmail;
 
     @NotNull
     @Setter
-    private String password;
+    private String lastAccessToken;
 
     @OneToOne(fetch = FetchType.EAGER, optional = false)
     @OnDelete(action = CASCADE)

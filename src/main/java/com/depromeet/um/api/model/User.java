@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.persistence.*;
 
@@ -22,15 +23,16 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column
     @NotNull
     String umId;
 
     @Embedded
     UserName userName;
 
+    @Nullable
+    String publicEmail;
+
     @Enumerated(EnumType.STRING)
-    @Column
     @NotNull
     LoginType loginType;
 }

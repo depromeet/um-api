@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.jetbrains.annotations.NotNull;
 
 import static lombok.AccessLevel.PROTECTED;
 
@@ -11,5 +12,9 @@ import static lombok.AccessLevel.PROTECTED;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor(access = PROTECTED)
-public abstract class LoginRequest {
+public class AppleLoginRequest extends LoginRequest {
+    @NotNull
+    private String appleId;
+    @NotNull
+    private String accessToken;
 }
