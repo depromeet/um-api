@@ -35,7 +35,7 @@ public class KakaoAccountService extends AccountService {
     @Override
     protected User registerAccount(RegisterRequest registerRequest) {
         KakaoRegisterRequest kakaoRegisterRequest = (KakaoRegisterRequest) registerRequest;
-        User user = userService.save(User.builder()
+        User user = userService.saveAndGet(User.builder()
                 .umId(kakaoRegisterRequest.getKakaoId() + KAKAO_PREFIX)
                 .loginType(LoginType.KAKAO)
                 .build());
@@ -62,6 +62,7 @@ public class KakaoAccountService extends AccountService {
             return UserSession.builder()
                     .id(kakaoUser.getUser().getId())
                     .umId(kakaoUser.getUser().getUmId())
+                    .loginType(LoginType.KAKAO)
                     .build();
         }
         throw new BadCredentialsException("Kakao token invalid");

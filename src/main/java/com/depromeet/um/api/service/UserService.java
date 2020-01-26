@@ -5,24 +5,34 @@ import com.depromeet.um.api.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class UserService {
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
-    public User save(User user) {
+    public User saveAndGet(User user) {
         userRepository.save(user);
         return user;
     }
 
-    public User findById(Long id) {
-        log.info("find by id :{}",id);
-        return userRepository.findById(id)
+    public void saveAll(List<User> users) {
+        userRepository.saveAll(users);
+    }
+
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    public User findByUserId(Long userId) {
+        log.info("Find user by id :{}",userId);
+        return userRepository.findById(userId)
                 .orElseThrow(IllegalAccessError::new);
+    }
+
+    public List<User> findAllByUserIds(List<Long> userIds) {
+        return userRepository.findAllById(userIds);
     }
 
     public User findByUmId(String umId) {

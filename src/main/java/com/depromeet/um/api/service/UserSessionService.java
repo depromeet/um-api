@@ -22,7 +22,7 @@ public class UserSessionService {
     }
 
     private User loadUser() {
-        User user = userService.findById(this.getCurrentUserSession().getId());
+        User user = userService.findByUserId(this.getCurrentUserSession().getId());
         userThreadLocal.set(user);
         return user;
     }

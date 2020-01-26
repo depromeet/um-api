@@ -4,12 +4,10 @@ import com.depromeet.um.api.auth.TokenProvider;
 import com.depromeet.um.api.auth.UserSession;
 import com.depromeet.um.api.dto.AppleLoginRequest;
 import com.depromeet.um.api.dto.AppleRegisterRequest;
-import com.depromeet.um.api.dto.KakaoLoginRequest;
 import com.depromeet.um.api.dto.LoginRequest;
 import com.depromeet.um.api.dto.LoginType;
 import com.depromeet.um.api.dto.RegisterRequest;
 import com.depromeet.um.api.model.AppleUser;
-import com.depromeet.um.api.model.KakaoUser;
 import com.depromeet.um.api.model.User;
 import com.depromeet.um.api.util.StringUtils;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -37,7 +35,7 @@ public class AppleAccountService extends AccountService {
     @Override
     protected User registerAccount(RegisterRequest registerRequest) {
         AppleRegisterRequest appleRegisterRequest = (AppleRegisterRequest) registerRequest;
-        User user = userService.save(User.builder()
+        User user = userService.saveAndGet(User.builder()
                 .umId(appleRegisterRequest.getAppleId() + APPLE_PREFIX)
                 .loginType(LoginType.APPLE)
                 .build());
@@ -63,6 +61,7 @@ public class AppleAccountService extends AccountService {
             return UserSession.builder()
                     .id(appleUser.getUser().getId())
                     .umId(appleUser.getUser().getUmId())
+                    .loginType(LoginType.APPLE)
                     .build();
         }
         throw new BadCredentialsException("Apple token invalid");

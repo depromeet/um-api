@@ -38,7 +38,7 @@ public class EmailAccountService extends AccountService {
     @Override
     protected User registerAccount(RegisterRequest registerRequest) {
         EmailRegisterRequest emailRegisterRequest = (EmailRegisterRequest) registerRequest;
-        User user = userService.save(User.builder()
+        User user = userService.saveAndGet(User.builder()
                 .umId(emailRegisterRequest.getEmail() + EMAIL_PREFIX)
                 .loginType(LoginType.EMAIL)
                 .build());
@@ -61,6 +61,7 @@ public class EmailAccountService extends AccountService {
             return UserSession.builder()
                     .id(emailUser.getUser().getId())
                     .umId(emailUser.getUser().getUmId())
+                    .loginType(LoginType.EMAIL)
                     .build();
         }
         throw new BadCredentialsException("Password not match");
