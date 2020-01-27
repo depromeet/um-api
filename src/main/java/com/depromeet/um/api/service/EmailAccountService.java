@@ -2,9 +2,11 @@ package com.depromeet.um.api.service;
 
 import com.depromeet.um.api.auth.TokenProvider;
 import com.depromeet.um.api.auth.UserSession;
-import com.depromeet.um.api.model.EmailUser;
+import com.depromeet.um.api.domain.EmailUserService;
+import com.depromeet.um.api.domain.UserService;
+import com.depromeet.um.api.domain.model.EmailUser;
 import com.depromeet.um.api.dto.LoginType;
-import com.depromeet.um.api.model.User;
+import com.depromeet.um.api.domain.model.User;
 import com.depromeet.um.api.dto.LoginRequest;
 import com.depromeet.um.api.dto.RegisterRequest;
 import com.depromeet.um.api.dto.EmailLoginRequest;

@@ -2,13 +2,15 @@ package com.depromeet.um.api.service;
 
 import com.depromeet.um.api.auth.TokenProvider;
 import com.depromeet.um.api.auth.UserSession;
+import com.depromeet.um.api.domain.AppleUserService;
+import com.depromeet.um.api.domain.UserService;
 import com.depromeet.um.api.dto.AppleLoginRequest;
 import com.depromeet.um.api.dto.AppleRegisterRequest;
 import com.depromeet.um.api.dto.LoginRequest;
 import com.depromeet.um.api.dto.LoginType;
 import com.depromeet.um.api.dto.RegisterRequest;
-import com.depromeet.um.api.model.AppleUser;
-import com.depromeet.um.api.model.User;
+import com.depromeet.um.api.domain.model.AppleUser;
+import com.depromeet.um.api.domain.model.User;
 import com.depromeet.um.api.util.StringUtils;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;

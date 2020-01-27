@@ -2,9 +2,11 @@ package com.depromeet.um.api.service;
 
 import com.depromeet.um.api.auth.UserSession;
 import com.depromeet.um.api.config.MQTTConfig;
+import com.depromeet.um.api.domain.ChatRoomService;
+import com.depromeet.um.api.domain.MessageService;
 import com.depromeet.um.api.dto.MessageRequest;
-import com.depromeet.um.api.model.ChatRoom;
-import com.depromeet.um.api.model.Message;
+import com.depromeet.um.api.domain.model.ChatRoom;
+import com.depromeet.um.api.domain.model.Message;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;

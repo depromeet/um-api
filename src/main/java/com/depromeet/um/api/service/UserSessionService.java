@@ -1,7 +1,8 @@
 package com.depromeet.um.api.service;
 
 import com.depromeet.um.api.auth.UserSession;
-import com.depromeet.um.api.model.User;
+import com.depromeet.um.api.domain.UserService;
+import com.depromeet.um.api.domain.model.User;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 

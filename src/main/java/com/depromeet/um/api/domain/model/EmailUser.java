@@ -1,4 +1,4 @@
-package com.depromeet.um.api.model;
+package com.depromeet.um.api.domain.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,20 +22,17 @@ import static org.hibernate.annotations.OnDeleteAction.CASCADE;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = PROTECTED)
-public class KakaoUser {
+public class EmailUser {
     /**
-     * 카카오 - 앱 사이의 부여되는 고유한 id
+     * User entity 의 email 와 매핑된다.
      */
     @Id
     @NotNull
-    private String kakaoId;
-
-    @NotNull
-    private String kakaoEmail;
+    private String email;
 
     @NotNull
     @Setter
-    private String lastAccessToken;
+    private String password;
 
     @OneToOne(fetch = FetchType.EAGER, optional = false)
     @OnDelete(action = CASCADE)

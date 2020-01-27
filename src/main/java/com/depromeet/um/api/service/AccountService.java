@@ -2,7 +2,8 @@ package com.depromeet.um.api.service;
 
 import com.depromeet.um.api.auth.TokenProvider;
 import com.depromeet.um.api.auth.UserSession;
-import com.depromeet.um.api.model.User;
+import com.depromeet.um.api.domain.UserService;
+import com.depromeet.um.api.domain.model.User;
 import com.depromeet.um.api.exception.AccountAlreadyExistException;
 import com.depromeet.um.api.dto.*;
 import com.depromeet.um.api.dto.LoginRequest;

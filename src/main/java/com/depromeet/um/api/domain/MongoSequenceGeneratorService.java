@@ -1,6 +1,6 @@
-package com.depromeet.um.api.service;
+package com.depromeet.um.api.domain;
 
-import com.depromeet.um.api.model.MongoSequence;
+import com.depromeet.um.api.domain.model.MongoSequence;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.data.mongodb.core.query.Update;

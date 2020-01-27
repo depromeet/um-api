@@ -1,10 +1,12 @@
 package com.depromeet.um.api.service;
 
+import com.depromeet.um.api.domain.ChatRoomService;
+import com.depromeet.um.api.domain.UserService;
 import com.depromeet.um.api.dto.ChatRoomInfo;
 import com.depromeet.um.api.dto.ChatRoomRequest;
 import com.depromeet.um.api.dto.ChatRoomsResponse;
-import com.depromeet.um.api.model.ChatRoom;
-import com.depromeet.um.api.model.User;
+import com.depromeet.um.api.domain.model.ChatRoom;
+import com.depromeet.um.api.domain.model.User;
 import com.depromeet.um.api.util.StringUtils;
 import com.google.common.collect.Lists;
 import org.springframework.stereotype.Service;
@@ -45,7 +47,8 @@ public class ChatService {
     public ChatRoomInfo createChatRoom(ChatRoomRequest chatRoomRequest) {
         Long chatRoomId = chatRoomService.generateSequenceId();
         List<Long> joinUserIds = Lists.newArrayList(chatRoomRequest.getJoinUserIds());
-        joinUserIds.add(userSessionService.getCurrentUserSession().getId());
+        Long userId = userSessionService.getCurrentUserSession().getId();
+        joinUserIds.add(userId);
         ChatRoom chatRoom = ChatRoom.builder()
                 .id(chatRoomId)
                 .brokerChannel(StringUtils.formatBrokerChannel(chatRoomId))
@@ -53,7 +56,7 @@ public class ChatService {
                 .build();
         chatRoomService.save(chatRoom);
         updateUserChatRooms(joinUserIds, chatRoomId);
-
+        System.out.println(chatRoomService.test(chatRoomId, userId));
         return ChatRoomInfo.builder()
                 .chatRoomId(chatRoom.getId())
                 .brokerChannel(chatRoom.getBrokerChannel())

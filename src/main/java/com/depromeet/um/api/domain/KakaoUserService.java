@@ -1,7 +1,7 @@
-package com.depromeet.um.api.service;
+package com.depromeet.um.api.domain;
 
-import com.depromeet.um.api.model.KakaoUser;
-import com.depromeet.um.api.repository.KakaoUserRepository;
+import com.depromeet.um.api.domain.model.KakaoUser;
+import com.depromeet.um.api.domain.repository.KakaoUserRepository;
 import org.springframework.stereotype.Service;
 
 @Service

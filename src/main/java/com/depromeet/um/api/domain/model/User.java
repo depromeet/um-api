@@ -1,4 +1,4 @@
-package com.depromeet.um.api.model;
+package com.depromeet.um.api.domain.model;
 
 import com.depromeet.um.api.dto.LoginType;
 import com.depromeet.um.api.util.LongListConverter;

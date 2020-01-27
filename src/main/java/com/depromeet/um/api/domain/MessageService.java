@@ -1,7 +1,7 @@
-package com.depromeet.um.api.service;
+package com.depromeet.um.api.domain;
 
-import com.depromeet.um.api.model.Message;
-import com.depromeet.um.api.repository.MessageRepository;
+import com.depromeet.um.api.domain.model.Message;
+import com.depromeet.um.api.domain.repository.MessageRepository;
 import org.springframework.stereotype.Service;
 
 @Service

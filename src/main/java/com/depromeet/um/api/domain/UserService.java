@@ -1,7 +1,7 @@
-package com.depromeet.um.api.service;
+package com.depromeet.um.api.domain;
 
-import com.depromeet.um.api.model.User;
-import com.depromeet.um.api.repository.UserRepository;
+import com.depromeet.um.api.domain.model.User;
+import com.depromeet.um.api.domain.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

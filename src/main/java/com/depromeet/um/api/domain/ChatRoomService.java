@@ -1,7 +1,7 @@
-package com.depromeet.um.api.service;
+package com.depromeet.um.api.domain;
 
-import com.depromeet.um.api.model.ChatRoom;
-import com.depromeet.um.api.repository.ChatRoomRepository;
+import com.depromeet.um.api.domain.model.ChatRoom;
+import com.depromeet.um.api.domain.repository.ChatRoomRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,6 +26,10 @@ public class ChatRoomService {
     public ChatRoom findByChatRoomId(Long chatRoomId) {
         return chatRoomRepository.findById(chatRoomId)
                 .orElseThrow(IllegalAccessError::new);
+    }
+    public ChatRoom test(Long chatRoomId, Long userId) {
+        System.out.println(chatRoomRepository.existsByIdAndJoinUserIdsIn(chatRoomId,3L));
+        return chatRoomRepository.findByIdAndAndJoinUserIdsIn(chatRoomId,userId);
     }
 
     public void save(ChatRoom chatRoom) {

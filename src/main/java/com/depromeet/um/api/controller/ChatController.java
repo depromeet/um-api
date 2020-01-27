@@ -4,7 +4,7 @@ import com.depromeet.um.api.dto.ChatRoomInfo;
 import com.depromeet.um.api.dto.ChatRoomRequest;
 import com.depromeet.um.api.dto.ChatRoomsResponse;
 import com.depromeet.um.api.dto.MessageRequest;
-import com.depromeet.um.api.model.Message;
+import com.depromeet.um.api.domain.model.Message;
 import com.depromeet.um.api.service.ChatMessageService;
 import com.depromeet.um.api.service.ChatService;
 import com.fasterxml.jackson.core.JsonProcessingException;

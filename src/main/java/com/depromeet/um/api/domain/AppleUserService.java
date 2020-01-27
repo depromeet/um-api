@@ -1,7 +1,7 @@
-package com.depromeet.um.api.service;
+package com.depromeet.um.api.domain;
 
-import com.depromeet.um.api.model.AppleUser;
-import com.depromeet.um.api.repository.AppleUserRepository;
+import com.depromeet.um.api.domain.model.AppleUser;
+import com.depromeet.um.api.domain.repository.AppleUserRepository;
 import org.springframework.stereotype.Service;
 
 @Service
