@@ -25,11 +25,7 @@ public class ChatRoomService {
     }
     public ChatRoom findByChatRoomId(Long chatRoomId) {
         return chatRoomRepository.findById(chatRoomId)
-                .orElseThrow(IllegalAccessError::new);
-    }
-    public ChatRoom test(Long chatRoomId, Long userId) {
-        System.out.println(chatRoomRepository.existsByIdAndJoinUserIdsIn(chatRoomId,3L));
-        return chatRoomRepository.findByIdAndAndJoinUserIdsIn(chatRoomId,userId);
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     public void save(ChatRoom chatRoom) {

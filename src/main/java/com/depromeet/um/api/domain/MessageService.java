@@ -7,13 +7,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class MessageService {
     private final MessageRepository messageRepository;
+    private final MongoSequenceGeneratorService mongoSequenceGeneratorService;
 
-    public MessageService(MessageRepository messageRepository) {
+    public MessageService(MessageRepository messageRepository, MongoSequenceGeneratorService mongoSequenceGeneratorService) {
         this.messageRepository = messageRepository;
+        this.mongoSequenceGeneratorService = mongoSequenceGeneratorService;
     }
 
     public void save(Message message) {
         messageRepository.save(message);
     }
 
+    public Long generateSequenceNo(Long chatRoomId) {
+        return mongoSequenceGeneratorService.generateSequence(Message.SEQUENCE_NAME + "#" +chatRoomId);
+    }
 }

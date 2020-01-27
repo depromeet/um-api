@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -24,15 +25,23 @@ import static lombok.AccessLevel.PROTECTED;
 @AllArgsConstructor
 @NoArgsConstructor(access = PROTECTED)
 public class Message {
+    /**
+     * id generated 를 위한 key string
+     */
+    @Transient
+    public static final String SEQUENCE_NAME = "messageSequence";
+
     @Id
     @JsonSerialize(using = ToStringSerializer.class)
-    private ObjectId id;
+    private ObjectId messageId;
     @NotNull
     private Long authorId;
     @NotNull
     private String brokerChannel;
     @NotNull
     private Long chatRoomId;
+    @NotNull
+    private Long sequenceNo;
     @NotNull
     private String content;
     @NotNull

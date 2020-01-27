@@ -1,5 +1,6 @@
 package com.depromeet.um.api.domain.model;
 
+import com.depromeet.um.api.dto.ChatRoomType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -30,9 +31,12 @@ public class ChatRoom {
      */
     @Id
     @NotNull
-    private Long id;
+    private Long chatRoomId;
+    @NotNull
+    private ChatRoomType chatRoomType;
     @NotNull
     private String brokerChannel;
     @NotNull
     private List<Long> joinUserIds;
+
 }

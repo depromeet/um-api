@@ -42,6 +42,7 @@ public class ChatMessageService {
                 .authorId(userSession.getId())
                 .brokerChannel(brokerChannel)
                 .chatRoomId(chatRoomId)
+                .sequenceNo(messageService.generateSequenceNo(chatRoomId))
                 .content(content)
                 .createTime(createTime)
                 .build();

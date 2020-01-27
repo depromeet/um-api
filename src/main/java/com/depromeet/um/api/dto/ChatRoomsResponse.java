@@ -1,5 +1,6 @@
 package com.depromeet.um.api.dto;
 
+import com.depromeet.um.api.domain.model.ChatRoom;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,5 +17,5 @@ import static lombok.AccessLevel.PROTECTED;
 @NoArgsConstructor(access = PROTECTED)
 public class ChatRoomsResponse {
     @NotNull
-    List<ChatRoomInfo> chatRoomInfos;
+    List<ChatRoom> chatRoomInfos;
 }

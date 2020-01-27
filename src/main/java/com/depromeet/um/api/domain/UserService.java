@@ -28,16 +28,20 @@ public class UserService {
     public User findByUserId(Long userId) {
         log.info("Find user by id :{}",userId);
         return userRepository.findById(userId)
-                .orElseThrow(IllegalAccessError::new);
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     public List<User> findAllByUserIds(List<Long> userIds) {
         return userRepository.findAllById(userIds);
     }
 
+    public long countByUserIds(List<Long> userIds) {
+        return userRepository.countByIds(userIds);
+    }
+
     public User findByUmId(String umId) {
         return userRepository.findByUmId(umId)
-                .orElseThrow(IllegalAccessError::new);
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     public boolean existsByUmId(String umId) {

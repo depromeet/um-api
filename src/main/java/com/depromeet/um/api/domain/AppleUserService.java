@@ -18,7 +18,7 @@ public class AppleUserService {
 
     public AppleUser findByAppleId(String appleId) {
         return appleUserRepository.findById(appleId)
-                .orElseThrow(IllegalAccessError::new);
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     public boolean existsByAppleId(String appleId) {

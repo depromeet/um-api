@@ -20,7 +20,7 @@ public class EmailUserService {
 
     public EmailUser findByEmail(String email) {
         return emailUserRepository.findById(email)
-                .orElseThrow(IllegalAccessError::new);
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     public boolean existsByEmail(String email) {

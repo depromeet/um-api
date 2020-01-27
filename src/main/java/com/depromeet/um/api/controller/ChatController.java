@@ -1,6 +1,6 @@
 package com.depromeet.um.api.controller;
 
-import com.depromeet.um.api.dto.ChatRoomInfo;
+import com.depromeet.um.api.domain.model.ChatRoom;
 import com.depromeet.um.api.dto.ChatRoomRequest;
 import com.depromeet.um.api.dto.ChatRoomsResponse;
 import com.depromeet.um.api.dto.MessageRequest;
@@ -38,7 +38,7 @@ public class ChatController {
 
     @ApiOperation(value = "채팅방 만들기")
     @PostMapping("/room")
-    public ResponseEntity<ChatRoomInfo> createChatRoom(@RequestBody ChatRoomRequest chatRoomRequest){
+    public ResponseEntity<ChatRoom> createChatRoom(@RequestBody ChatRoomRequest chatRoomRequest){
         return ResponseEntity.ok(chatService.createChatRoom(chatRoomRequest));
     }
 

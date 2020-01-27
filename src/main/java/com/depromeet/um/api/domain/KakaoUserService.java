@@ -18,7 +18,7 @@ public class KakaoUserService {
 
     public KakaoUser findByKakaoId(String kakaoId) {
         return kakaoUserRepository.findById(kakaoId)
-                .orElseThrow(IllegalAccessError::new);
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     public boolean existsByKakaoId(String kakaoId) {

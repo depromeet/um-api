@@ -25,6 +25,19 @@ public class RestControllerExceptionHandler {
                 .build();
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler({IllegalArgumentException.class})
+    public ErrorResponse handleIllegalArgumentException(IllegalArgumentException e) {
+        log.error("IllegalArgumentException { }", e);
+        e.printStackTrace();
+        HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
+        return ErrorResponse.builder()
+                .status(httpStatus.value())
+                .error(httpStatus.getReasonPhrase())
+                .message(e.getClass().getSimpleName())
+                .build();
+    }
+
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler({Exception.class})
     public ErrorResponse handleException(Exception e) {

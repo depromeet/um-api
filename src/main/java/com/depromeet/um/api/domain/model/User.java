@@ -40,15 +40,15 @@ public class User {
     @NotNull
     private LoginType loginType;
 
-    @Lob
-    @Convert(converter = LongListConverter.class)
-    private List<Long> chatRoomIds;
-
-    public void addChatRoomId(Long chatRoomId) {
-        this.chatRoomIds.add(chatRoomId);
-    }
-
-    public void removeChatRoomId(Long chatRoomId) {
-        this.chatRoomIds.remove(chatRoomId);
-    }
+//    @Lob
+//    @Convert(converter = LongListConverter.class)
+//    private List<Long> chatRoomIds;
+//
+//    public void addChatRoomId(Long chatRoomId) {
+//        this.chatRoomIds.add(chatRoomId);
+//    }
+//
+//    public void removeChatRoomId(Long chatRoomId) {
+//        this.chatRoomIds.remove(chatRoomId);
+//    }
 }

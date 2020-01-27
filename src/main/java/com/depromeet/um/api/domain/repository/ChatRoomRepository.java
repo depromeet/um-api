@@ -6,6 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ChatRoomRepository extends MongoRepository<ChatRoom, Long> {
-    ChatRoom findByIdAndAndJoinUserIdsIn(Long id, Long userId);
-    boolean existsByIdAndJoinUserIdsIn(Long id, Long userId);
 }
