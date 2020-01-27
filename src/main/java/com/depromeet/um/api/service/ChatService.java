@@ -72,7 +72,7 @@ public class ChatService {
         userChatRoomService.saveAll(userChatRooms);
         ChatRoom chatRoom = ChatRoom.builder()
                 .chatRoomType(chatRoomType)
-                .id(chatRoomId)
+                .chatRoomId(chatRoomId)
                 .brokerChannel(StringUtils.formatBrokerChannel(chatRoomId))
                 .joinUserIds(joinUserIds)
                 .build();
