@@ -1,13 +1,16 @@
-package com.depromeet.um.api.model;
+package com.depromeet.um.api.domain.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.Embeddable;
+
+import static lombok.AccessLevel.PROTECTED;
 
 
 @Embeddable
@@ -15,19 +18,17 @@ import javax.persistence.Embeddable;
 @Builder
 @ToString
 @AllArgsConstructor
+@NoArgsConstructor(access = PROTECTED)
 public class UserName {
-    protected UserName() {
-    }
+    @NotNull
+    @Setter
+    private String firstName;
 
     @NotNull
     @Setter
-    String firstName;
+    private String lastName;
 
     @NotNull
     @Setter
-    String lastName;
-
-    @NotNull
-    @Setter
-    String nickName;
+    private String nickName;
 }

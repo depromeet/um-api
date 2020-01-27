@@ -1,8 +1,9 @@
-package com.depromeet.um.api.model;
+package com.depromeet.um.api.domain.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.jetbrains.annotations.NotNull;
@@ -13,25 +14,24 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+import static lombok.AccessLevel.PROTECTED;
 import static org.hibernate.annotations.OnDeleteAction.CASCADE;
 
 @Entity
 @Getter
 @Builder
 @AllArgsConstructor
-public class KakaoUser {
-    protected KakaoUser() {
-    }
-
+@NoArgsConstructor(access = PROTECTED)
+public class AppleUser {
     /**
-     * 카카오 - 앱 사이의 부여되는 고유한 id
+     * Apple 에서 제공해주는 unique Id
      */
     @Id
     @NotNull
-    private String kakaoId;
+    private String appleId;
 
     @NotNull
-    private String kakaoEmail;
+    private String appleEmail;
 
     @NotNull
     @Setter

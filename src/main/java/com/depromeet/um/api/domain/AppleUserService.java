@@ -1,7 +1,7 @@
-package com.depromeet.um.api.service;
+package com.depromeet.um.api.domain;
 
-import com.depromeet.um.api.model.AppleUser;
-import com.depromeet.um.api.repository.AppleUserRepository;
+import com.depromeet.um.api.domain.model.AppleUser;
+import com.depromeet.um.api.domain.repository.AppleUserRepository;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,7 +18,7 @@ public class AppleUserService {
 
     public AppleUser findByAppleId(String appleId) {
         return appleUserRepository.findById(appleId)
-                .orElseThrow(IllegalAccessError::new);
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     public boolean existsByAppleId(String appleId) {

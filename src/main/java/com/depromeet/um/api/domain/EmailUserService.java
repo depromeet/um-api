@@ -1,7 +1,7 @@
-package com.depromeet.um.api.service;
+package com.depromeet.um.api.domain;
 
-import com.depromeet.um.api.model.EmailUser;
-import com.depromeet.um.api.repository.EmailUserRepository;
+import com.depromeet.um.api.domain.model.EmailUser;
+import com.depromeet.um.api.domain.repository.EmailUserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +20,7 @@ public class EmailUserService {
 
     public EmailUser findByEmail(String email) {
         return emailUserRepository.findById(email)
-                .orElseThrow(IllegalAccessError::new);
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     public boolean existsByEmail(String email) {

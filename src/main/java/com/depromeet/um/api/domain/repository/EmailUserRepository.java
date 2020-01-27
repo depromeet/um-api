@@ -1,6 +1,6 @@
-package com.depromeet.um.api.repository;
+package com.depromeet.um.api.domain.repository;
 
-import com.depromeet.um.api.model.EmailUser;
+import com.depromeet.um.api.domain.model.EmailUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

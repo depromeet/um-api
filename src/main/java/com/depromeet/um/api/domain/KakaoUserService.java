@@ -1,7 +1,7 @@
-package com.depromeet.um.api.service;
+package com.depromeet.um.api.domain;
 
-import com.depromeet.um.api.model.KakaoUser;
-import com.depromeet.um.api.repository.KakaoUserRepository;
+import com.depromeet.um.api.domain.model.KakaoUser;
+import com.depromeet.um.api.domain.repository.KakaoUserRepository;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,7 +18,7 @@ public class KakaoUserService {
 
     public KakaoUser findByKakaoId(String kakaoId) {
         return kakaoUserRepository.findById(kakaoId)
-                .orElseThrow(IllegalAccessError::new);
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     public boolean existsByKakaoId(String kakaoId) {

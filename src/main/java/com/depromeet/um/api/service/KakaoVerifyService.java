@@ -1,7 +1,7 @@
 package com.depromeet.um.api.service;
 
 import com.depromeet.um.api.dto.KakaoTokenInfoResponse;
-import com.depromeet.um.api.model.KakaoUser;
+import com.depromeet.um.api.domain.model.KakaoUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;

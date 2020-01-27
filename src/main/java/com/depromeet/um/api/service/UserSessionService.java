@@ -1,7 +1,8 @@
 package com.depromeet.um.api.service;
 
 import com.depromeet.um.api.auth.UserSession;
-import com.depromeet.um.api.model.User;
+import com.depromeet.um.api.domain.UserService;
+import com.depromeet.um.api.domain.model.User;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,7 @@ public class UserSessionService {
     }
 
     private User loadUser() {
-        User user = userService.findById(this.getCurrentUserSession().getId());
+        User user = userService.findByUserId(this.getCurrentUserSession().getId());
         userThreadLocal.set(user);
         return user;
     }
