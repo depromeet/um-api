@@ -30,8 +30,8 @@ public class UserChatRoomService {
         return userChatRoomRepository.existsByUserIdAndDirectChatRoomIdsIn(userId, chatRoomId);
     }
 
-    public void save(UserChatRoom userChatRoom) {
-        userChatRoomRepository.save(userChatRoom);
+    public UserChatRoom save(UserChatRoom userChatRoom) {
+        return userChatRoomRepository.save(userChatRoom);
     }
 
     public void saveAll(List<UserChatRoom> userChatRooms) {

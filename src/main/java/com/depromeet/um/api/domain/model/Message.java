@@ -33,7 +33,7 @@ public class Message {
 
     @Id
     @JsonSerialize(using = ToStringSerializer.class)
-    private ObjectId messageId;
+    private ObjectId id;
     @NotNull
     private Long authorId;
     @NotNull

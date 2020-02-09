@@ -26,12 +26,10 @@ public class ChatRoom {
      */
     @Transient
     public static final String SEQUENCE_NAME = "chatRoomSequence";
-    /**
-     * epoch time + uuid 조합으로 이루어진 유일한 id 이다.
-     */
+
     @Id
     @NotNull
-    private Long chatRoomId;
+    private Long id;
     @NotNull
     private ChatRoomType chatRoomType;
     @NotNull

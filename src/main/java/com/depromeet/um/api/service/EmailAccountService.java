@@ -40,7 +40,7 @@ public class EmailAccountService extends AccountService {
     @Override
     protected User registerAccount(RegisterRequest registerRequest) {
         EmailRegisterRequest emailRegisterRequest = (EmailRegisterRequest) registerRequest;
-        User user = userService.saveAndGet(User.builder()
+        User user = userService.save(User.builder()
                 .umId(emailRegisterRequest.getEmail() + EMAIL_PREFIX)
                 .loginType(LoginType.EMAIL)
                 .build());

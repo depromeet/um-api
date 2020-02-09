@@ -12,8 +12,8 @@ public class KakaoUserService {
         this.kakaoUserRepository = kakaoUserRepository;
     }
 
-    public void save(KakaoUser kakaoUser) {
-        kakaoUserRepository.save(kakaoUser);
+    public KakaoUser save(KakaoUser kakaoUser) {
+        return kakaoUserRepository.save(kakaoUser);
     }
 
     public KakaoUser findByKakaoId(String kakaoId) {

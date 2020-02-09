@@ -2,6 +2,7 @@ package com.depromeet.um.api.domain.model;
 
 import com.depromeet.um.api.dto.LoginType;
 import com.depromeet.um.api.util.LongListConverter;
+import com.depromeet.um.api.util.StringSetConverter;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,6 +14,7 @@ import org.jetbrains.annotations.Nullable;
 import javax.persistence.*;
 
 import java.util.List;
+import java.util.Set;
 
 import static lombok.AccessLevel.PROTECTED;
 
@@ -40,15 +42,11 @@ public class User {
     @NotNull
     private LoginType loginType;
 
-//    @Lob
-//    @Convert(converter = LongListConverter.class)
-//    private List<Long> chatRoomIds;
-//
-//    public void addChatRoomId(Long chatRoomId) {
-//        this.chatRoomIds.add(chatRoomId);
-//    }
-//
-//    public void removeChatRoomId(Long chatRoomId) {
-//        this.chatRoomIds.remove(chatRoomId);
-//    }
+    @Lob
+    @Convert(converter = StringSetConverter.class)
+    private Set<String> interestedCategorySet;
+
+    @Lob
+    @Convert(converter = StringSetConverter.class)
+    private Set<String> hasCategorySet;
 }
