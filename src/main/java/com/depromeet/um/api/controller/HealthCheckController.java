@@ -1,11 +1,9 @@
 package com.depromeet.um.api.controller;
 
-import com.depromeet.um.api.auth.UserSession;
 import com.depromeet.um.api.service.UserSessionService;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

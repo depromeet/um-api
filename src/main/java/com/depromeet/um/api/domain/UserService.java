@@ -12,9 +12,8 @@ import java.util.List;
 public class UserService {
     private final UserRepository userRepository;
 
-    public User saveAndGet(User user) {
-        userRepository.save(user);
-        return user;
+    public User save(User user) {
+        return userRepository.save(user);
     }
 
     public void saveAll(List<User> users) {

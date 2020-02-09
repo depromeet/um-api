@@ -37,7 +37,7 @@ public class AppleAccountService extends AccountService {
     @Override
     protected User registerAccount(RegisterRequest registerRequest) {
         AppleRegisterRequest appleRegisterRequest = (AppleRegisterRequest) registerRequest;
-        User user = userService.saveAndGet(User.builder()
+        User user = userService.save(User.builder()
                 .umId(appleRegisterRequest.getAppleId() + APPLE_PREFIX)
                 .loginType(LoginType.APPLE)
                 .build());

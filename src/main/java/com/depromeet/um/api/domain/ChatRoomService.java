@@ -28,7 +28,7 @@ public class ChatRoomService {
                 .orElseThrow(IllegalArgumentException::new);
     }
 
-    public void save(ChatRoom chatRoom) {
-        chatRoomRepository.save(chatRoom);
+    public ChatRoom save(ChatRoom chatRoom) {
+        return chatRoomRepository.save(chatRoom);
     }
 }

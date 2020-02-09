@@ -37,7 +37,7 @@ public class KakaoAccountService extends AccountService {
     @Override
     protected User registerAccount(RegisterRequest registerRequest) {
         KakaoRegisterRequest kakaoRegisterRequest = (KakaoRegisterRequest) registerRequest;
-        User user = userService.saveAndGet(User.builder()
+        User user = userService.save(User.builder()
                 .umId(kakaoRegisterRequest.getKakaoId() + KAKAO_PREFIX)
                 .loginType(LoginType.KAKAO)
                 .build());

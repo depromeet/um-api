@@ -14,8 +14,8 @@ public class EmailUserService {
         this.emailUserRepository = emailUserRepository;
     }
 
-    public void save(EmailUser emailUser) {
-        emailUserRepository.save(emailUser);
+    public EmailUser save(EmailUser emailUser) {
+        return emailUserRepository.save(emailUser);
     }
 
     public EmailUser findByEmail(String email) {

@@ -12,8 +12,8 @@ public class AppleUserService {
         this.appleUserRepository = appleUserRepository;
     }
 
-    public void save(AppleUser appleUser) {
-        appleUserRepository.save(appleUser);
+    public AppleUser save(AppleUser appleUser) {
+        return appleUserRepository.save(appleUser);
     }
 
     public AppleUser findByAppleId(String appleId) {

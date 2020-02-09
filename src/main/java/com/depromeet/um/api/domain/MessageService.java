@@ -14,8 +14,8 @@ public class MessageService {
         this.mongoSequenceGeneratorService = mongoSequenceGeneratorService;
     }
 
-    public void save(Message message) {
-        messageRepository.save(message);
+    public Message save(Message message) {
+        return messageRepository.save(message);
     }
 
     public Long generateSequenceNo(Long chatRoomId) {
